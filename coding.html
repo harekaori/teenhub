@@ -1,98 +1,1443 @@
-<!-- =====================================================
-     GAME MAKER
-====================================================== -->
+<!DOCTYPE html>
 
-<article class="card">
+<html lang="en">
 
-    <div class="card-icon">
-        🎮
+<head>
+
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teen Learning Portal | Coding</title>
+
+
+<style>
+
+    /* =========================================================
+       BASIC RESET
+    ========================================================= */
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #080b18;
+        color: #f5f7ff;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
+
+    .background {
+
+        position: fixed;
+        inset: 0;
+
+        overflow: hidden;
+
+        pointer-events: none;
+
+        z-index: 0;
+    }
+
+
+    /* Floating blobs */
+
+    .blob {
+
+        position: absolute;
+
+        border-radius: 50%;
+
+        filter: blur(80px);
+
+        opacity: 0.25;
+    }
+
+
+    .blob.one {
+
+        width: 350px;
+        height: 350px;
+
+        background: #7c3aed;
+
+        top: -120px;
+        left: -100px;
+    }
+
+
+    .blob.two {
+
+        width: 300px;
+        height: 300px;
+
+        background: #06b6d4;
+
+        top: 45%;
+        right: -100px;
+    }
+
+
+    .blob.three {
+
+        width: 280px;
+        height: 280px;
+
+        background: #ec4899;
+
+        bottom: -120px;
+        left: 35%;
+    }
+
+
+    /* =========================================================
+       FLOATING FORMULAS
+    ========================================================= */
+
+    .formula {
+
+        position: absolute;
+
+        font-family: Georgia, serif;
+
+        font-style: italic;
+
+        opacity: 0.13;
+
+        white-space: nowrap;
+    }
+
+
+    .code-symbol {
+
+        position: absolute;
+
+        font-family: "Courier New", monospace;
+
+        opacity: 0.14;
+
+        white-space: nowrap;
+    }
+
+
+    .formula.one {
+
+        top: 12%;
+        left: 5%;
+
+        font-size: 2rem;
+    }
+
+
+    .formula.two {
+
+        top: 30%;
+        right: 6%;
+
+        font-size: 1.8rem;
+    }
+
+
+    .formula.three {
+
+        bottom: 22%;
+        left: 8%;
+
+        font-size: 2.2rem;
+    }
+
+
+    .formula.four {
+
+        bottom: 8%;
+        right: 10%;
+
+        font-size: 1.6rem;
+    }
+
+
+    .code-symbol.one {
+
+        top: 20%;
+        left: 45%;
+
+        font-size: 1.3rem;
+    }
+
+
+    .code-symbol.two {
+
+        top: 65%;
+        right: 38%;
+
+        font-size: 1.2rem;
+    }
+
+
+    .code-symbol.three {
+
+        bottom: 15%;
+        left: 45%;
+
+        font-size: 1.4rem;
+    }
+
+
+    /* =========================================================
+       MAIN CONTAINER
+    ========================================================= */
+
+    .container {
+
+        position: relative;
+
+        z-index: 1;
+
+        width: min(1150px, 92%);
+
+        margin: auto;
+
+        padding: 30px 0 50px;
+    }
+
+
+    /* =========================================================
+       TOP BAR
+    ========================================================= */
+
+    .top-bar {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 45px;
+    }
+
+
+    .back-link {
+
+        display: inline-block;
+
+        color: #c4b5fd;
+
+        text-decoration: none;
+
+        font-weight: bold;
+
+        padding: 10px 18px;
+
+        border: 1px solid rgba(196, 181, 253, 0.35);
+
+        border-radius: 30px;
+
+        background: rgba(20, 15, 45, 0.65);
+
+        transition: 0.25s ease;
+    }
+
+
+    .back-link:hover {
+
+        color: white;
+
+        border-color: #a78bfa;
+
+        transform: translateX(-4px);
+    }
+
+
+    .section-label {
+
+        font-size: 0.85rem;
+
+        letter-spacing: 3px;
+
+        text-transform: uppercase;
+
+        color: #67e8f9;
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+
+        text-align: center;
+
+        padding: 30px 20px 50px;
+    }
+
+
+    .hero-icon {
+
+        font-size: 4rem;
+
+        margin-bottom: 15px;
+
+        filter:
+            drop-shadow(
+                0 0 15px rgba(103, 232, 249, 0.5)
+            );
+    }
+
+
+    .hero h1 {
+
+        font-size: clamp(3rem, 7vw, 5.5rem);
+
+        line-height: 0.95;
+
+        margin-bottom: 20px;
+
+        background:
+            linear-gradient(
+                90deg,
+                #a78bfa,
+                #67e8f9,
+                #f0abfc
+            );
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+    }
+
+
+    .hero p {
+
+        max-width: 700px;
+
+        margin: auto;
+
+        color: #cbd5e1;
+
+        font-size: 1.1rem;
+
+        line-height: 1.7;
+    }
+
+
+    /* =========================================================
+       SECTION TITLE
+    ========================================================= */
+
+    .section-title {
+
+        margin: 30px 0 20px;
+    }
+
+
+    .section-title h2 {
+
+        font-size: 1.8rem;
+    }
+
+
+    .section-title p {
+
+        color: #94a3b8;
+
+        margin-top: 6px;
+    }
+
+
+    /* =========================================================
+       MAIN CARDS
+    ========================================================= */
+
+    .card-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 22px;
+    }
+
+
+    .card {
+
+        position: relative;
+
+        min-height: 240px;
+
+        padding: 30px;
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(30, 25, 65, 0.94),
+                rgba(10, 15, 35, 0.92)
+            );
+
+        border:
+            1px solid
+            rgba(167, 139, 250, 0.2);
+
+        box-shadow:
+            0 15px 40px rgba(0, 0, 0, 0.25);
+
+        overflow: hidden;
+
+        transition:
+            transform 0.25s ease,
+            border-color 0.25s ease;
+    }
+
+
+    .card::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 110px;
+        height: 110px;
+
+        border-radius: 50%;
+
+        background: #7c3aed;
+
+        filter: blur(55px);
+
+        opacity: 0.35;
+
+        right: -30px;
+        top: -30px;
+    }
+
+
+    .card:hover {
+
+        transform: translateY(-7px);
+
+        border-color:
+            rgba(103, 232, 249, 0.55);
+    }
+
+
+    .card-icon {
+
+        font-size: 2.5rem;
+
+        margin-bottom: 18px;
+    }
+
+
+    .card h3 {
+
+        font-size: 1.5rem;
+
+        margin-bottom: 10px;
+    }
+
+
+    .card p {
+
+        color: #aeb8ca;
+
+        line-height: 1.6;
+
+        margin-bottom: 20px;
+    }
+
+
+    .card-link {
+
+        display: inline-block;
+
+        text-decoration: none;
+
+        color: #67e8f9;
+
+        font-weight: bold;
+
+        border-bottom:
+            1px solid transparent;
+    }
+
+
+    .card-link:hover {
+
+        border-bottom-color:
+            #67e8f9;
+    }
+
+
+    /* =========================================================
+       DRAW WITH CODE
+    ========================================================= */
+
+    .draw-section {
+
+        margin-top: 50px;
+
+        padding: 35px;
+
+        border-radius: 26px;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(88, 28, 135, 0.5),
+                rgba(8, 47, 73, 0.5)
+            );
+
+        border:
+            1px solid
+            rgba(103, 232, 249, 0.25);
+    }
+
+
+    .draw-header {
+
+        text-align: center;
+
+        margin-bottom: 30px;
+    }
+
+
+    .draw-header .small-title {
+
+        color: #f0abfc;
+
+        text-transform: uppercase;
+
+        letter-spacing: 3px;
+
+        font-size: 0.8rem;
+
+        font-weight: bold;
+
+        margin-bottom: 10px;
+    }
+
+
+    .draw-header h2 {
+
+        font-size: 2.2rem;
+
+        margin-bottom: 10px;
+    }
+
+
+    .draw-header p {
+
+        color: #cbd5e1;
+
+        line-height: 1.6;
+
+        max-width: 650px;
+
+        margin: auto;
+    }
+
+
+    /* =========================================================
+       LEVELS
+    ========================================================= */
+
+    .levels {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(5, 1fr);
+
+        gap: 12px;
+    }
+
+
+    .level {
+
+        padding: 20px 12px;
+
+        text-align: center;
+
+        border-radius: 18px;
+
+        background:
+            rgba(8, 11, 24, 0.65);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.08);
+
+        transition:
+            transform 0.25s ease,
+            border-color 0.25s ease;
+    }
+
+
+    .level:hover {
+
+        transform: translateY(-5px);
+
+        border-color:
+            rgba(103, 232, 249, 0.5);
+    }
+
+
+    .level-number {
+
+        font-size: 0.75rem;
+
+        letter-spacing: 2px;
+
+        color: #94a3b8;
+
+        margin-bottom: 8px;
+    }
+
+
+    .level-icon {
+
+        font-size: 1.8rem;
+
+        margin-bottom: 8px;
+    }
+
+
+    .level h3 {
+
+        font-size: 1rem;
+
+        margin-bottom: 6px;
+    }
+
+
+    .level p {
+
+        font-size: 0.8rem;
+
+        color: #94a3b8;
+
+        line-height: 1.4;
+    }
+
+
+    /* =========================================================
+       BOSS LEVEL
+    ========================================================= */
+
+    .boss {
+
+        margin-top: 25px;
+
+        padding: 25px;
+
+        text-align: center;
+
+        border-radius: 20px;
+
+        background:
+            rgba(15, 23, 42, 0.8);
+
+        border:
+            1px solid
+            rgba(240, 171, 252, 0.35);
+    }
+
+
+    .boss-title {
+
+        color: #f0abfc;
+
+        font-size: 0.8rem;
+
+        letter-spacing: 3px;
+
+        text-transform: uppercase;
+
+        margin-bottom: 8px;
+    }
+
+
+    .boss h3 {
+
+        font-size: 1.5rem;
+
+        margin-bottom: 8px;
+    }
+
+
+    .boss p {
+
+        color: #cbd5e1;
+
+        line-height: 1.5;
+    }
+
+
+    /* =========================================================
+       QUICK LINKS
+    ========================================================= */
+
+    .quick-links {
+
+        margin-top: 50px;
+    }
+
+
+    .quick-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 15px;
+    }
+
+
+    .quick-link {
+
+        display: block;
+
+        padding: 18px;
+
+        text-align: center;
+
+        border-radius: 16px;
+
+        text-decoration: none;
+
+        color: #dbeafe;
+
+        background:
+            rgba(20, 25, 50, 0.75);
+
+        border:
+            1px solid
+            rgba(148, 163, 184, 0.15);
+
+        transition: 0.25s ease;
+    }
+
+
+    .quick-link:hover {
+
+        transform: translateY(-4px);
+
+        border-color: #67e8f9;
+
+        color: white;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .credit {
+
+        text-align: center;
+
+        margin-top: 60px;
+
+        color: #64748b;
+
+        font-size: 0.85rem;
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 850px) {
+
+        .levels {
+
+            grid-template-columns:
+                repeat(3, 1fr);
+        }
+
+    }
+
+
+    @media (max-width: 750px) {
+
+        .top-bar {
+
+            margin-bottom: 25px;
+        }
+
+
+        .section-label {
+
+            display: none;
+        }
+
+
+        .hero {
+
+            padding-top: 20px;
+        }
+
+
+        .hero h1 {
+
+            font-size: 3.5rem;
+        }
+
+
+        .card-grid {
+
+            grid-template-columns: 1fr;
+        }
+
+
+        .levels {
+
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+
+        .quick-grid {
+
+            grid-template-columns: 1fr;
+        }
+
+
+        .draw-section {
+
+            padding: 25px 18px;
+        }
+
+    }
+
+
+    @media (max-width: 450px) {
+
+        .levels {
+
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =========================================================
+     FLOATING BACKGROUND
+========================================================= -->
+
+<div class="background">
+
+    <div class="blob one"></div>
+
+    <div class="blob two"></div>
+
+    <div class="blob three"></div>
+
+
+    <div class="formula one">
+        y = sin(x)
     </div>
 
-    <h3>Game Maker</h3>
-
-    <p>
-        Make your own game. Create characters, rules,
-        scores and challenges. Start simple, then
-        see how far you can take it.
-    </p>
-
-    <a href="#" class="card-link">
-        Start making →
-    </a>
-
-</article>
-
-
-<!-- =====================================================
-     DRAW WITH CODE
-====================================================== -->
-
-<article class="card">
-
-    <div class="card-icon">
-        🎨
+    <div class="formula two">
+        E = mc²
     </div>
 
-    <h3>Draw with Code</h3>
-
-    <p>
-        Make pictures using code. Change a square,
-        add circles and triangles, move shapes around
-        and eventually create your own masterpiece.
-    </p>
-
-    <a href="#" class="card-link">
-        Start drawing →
-    </a>
-
-</article>
-
-
-<!-- =====================================================
-     MEET TINA
-====================================================== -->
-
-<article class="card">
-
-    <div class="card-icon">
-        🐢
+    <div class="formula three">
+        ∑ f(x)
     </div>
 
-    <h3>Meet Tina</h3>
-
-    <p>
-        Meet Tina the Turtle! Use Python to teach her
-        how to move, turn and draw. Can you make her
-        create amazing patterns?
-    </p>
-
-    <a href="#" class="card-link">
-        Meet Tina →
-    </a>
-
-</article>
-
-
-<!-- =====================================================
-     CODE CHALLENGES
-====================================================== -->
-
-<article class="card">
-
-    <div class="card-icon">
-        🧩
+    <div class="formula four">
+        π ≈ 3.14159
     </div>
 
-    <h3>Code Challenges</h3>
 
-    <p>
-        Crack codes, hunt bugs, discover patterns
-        and solve programming puzzles. Some are easy.
-        Some are seriously tricky!
-    </p>
+    <div class="code-symbol one">
+        &lt;/&gt;
+    </div>
 
-    <a href="#" class="card-link">
-        Take a challenge →
-    </a>
+    <div class="code-symbol two">
+        if (x &gt; 0) { ... }
+    </div>
 
-</article>
+    <div class="code-symbol three">
+        R U2 R' U' R U' R'
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="container">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <div class="top-bar">
+
+        <a
+            href="index.html"
+            class="back-link"
+        >
+            ← Teen Hub
+        </a>
+
+
+        <div class="section-label">
+            Level Up Your Skills
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+        <div class="hero-icon">
+            💻
+        </div>
+
+
+        <h1>
+            CODING
+        </h1>
+
+
+        <p>
+
+            Don't just use technology.
+
+            Learn how to make it do things.
+
+            Experiment, break things, fix them,
+
+            and build something that is yours.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CHOOSE YOUR ROUTE
+    ====================================================== -->
+
+    <div class="section-title">
+
+        <h2>
+            What do you want to make?
+        </h2>
+
+
+        <p>
+            Pick something that looks interesting.
+            There is no wrong place to start.
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOUR MAIN CARDS
+    ====================================================== -->
+
+    <section class="card-grid">
+
+
+        <!-- GAME MAKER -->
+
+        <article class="card">
+
+            <div class="card-icon">
+                🎮
+            </div>
+
+
+            <h3>
+                Game Maker
+            </h3>
+
+
+            <p>
+
+                Make your own game.
+
+                Create characters, rules,
+
+                scores and challenges.
+
+                Start simple, then see how far
+
+                you can take it.
+
+            </p>
+
+
+            <a
+                href="#"
+                class="card-link"
+            >
+                Start making →
+            </a>
+
+        </article>
+
+
+
+        <!-- DRAW WITH CODE -->
+
+        <article class="card">
+
+            <div class="card-icon">
+                🎨
+            </div>
+
+
+            <h3>
+                Draw with Code
+            </h3>
+
+
+            <p>
+
+                Make pictures using code.
+
+                Change a square, add circles
+
+                and triangles, move shapes around
+
+                and eventually create your
+
+                own masterpiece.
+
+            </p>
+
+
+            <a
+                href="#draw"
+                class="card-link"
+            >
+                Start drawing →
+            </a>
+
+        </article>
+
+
+
+        <!-- MEET TINA -->
+
+        <article class="card">
+
+            <div class="card-icon">
+                🐢
+            </div>
+
+
+            <h3>
+                Meet Tina
+            </h3>
+
+
+            <p>
+
+                Meet Tina the Turtle!
+
+                Use Python to teach her how
+
+                to move, turn and draw.
+
+                Can you make her create
+
+                amazing patterns?
+
+            </p>
+
+
+            <a
+                href="#"
+                class="card-link"
+            >
+                Meet Tina →
+            </a>
+
+        </article>
+
+
+
+        <!-- CODE CHALLENGES -->
+
+        <article class="card">
+
+            <div class="card-icon">
+                🧩
+            </div>
+
+
+            <h3>
+                Code Challenges
+            </h3>
+
+
+            <p>
+
+                Crack codes, hunt bugs,
+
+                discover patterns and solve
+
+                programming puzzles.
+
+                Some are easy.
+
+                Some are seriously tricky!
+
+            </p>
+
+
+            <a
+                href="#"
+                class="card-link"
+            >
+                Take a challenge →
+            </a>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DRAW WITH CODE
+    ====================================================== -->
+
+    <section
+        class="draw-section"
+        id="draw"
+    >
+
+
+        <div class="draw-header">
+
+            <div class="small-title">
+                🎨 Creative Coding Mission
+            </div>
+
+
+            <h2>
+                Draw with Code
+            </h2>
+
+
+            <p>
+
+                You don't need to be an artist.
+
+                You just need to give the computer
+
+                some instructions.
+
+                Start with a square and see
+
+                what you can create.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- LEVELS -->
+
+        <div class="levels">
+
+
+            <!-- LEVEL 1 -->
+
+            <div class="level">
+
+                <div class="level-number">
+                    LEVEL 1
+                </div>
+
+                <div class="level-icon">
+                    🟢
+                </div>
+
+                <h3>
+                    Change It
+                </h3>
+
+                <p>
+                    Change the square's
+                    colour and size.
+                </p>
+
+            </div>
+
+
+
+            <!-- LEVEL 2 -->
+
+            <div class="level">
+
+                <div class="level-number">
+                    LEVEL 2
+                </div>
+
+                <div class="level-icon">
+                    🔵
+                </div>
+
+                <h3>
+                    Move It
+                </h3>
+
+                <p>
+                    Move your shape
+                    around the canvas.
+                </p>
+
+            </div>
+
+
+
+            <!-- LEVEL 3 -->
+
+            <div class="level">
+
+                <div class="level-number">
+                    LEVEL 3
+                </div>
+
+                <div class="level-icon">
+                    🟣
+                </div>
+
+                <h3>
+                    Add It
+                </h3>
+
+                <p>
+                    Add circles and
+                    other shapes.
+                </p>
+
+            </div>
+
+
+
+            <!-- LEVEL 4 -->
+
+            <div class="level">
+
+                <div class="level-number">
+                    LEVEL 4
+                </div>
+
+                <div class="level-icon">
+                    🟠
+                </div>
+
+                <h3>
+                    Build It
+                </h3>
+
+                <p>
+                    Combine shapes
+                    to make something.
+                </p>
+
+            </div>
+
+
+
+            <!-- LEVEL 5 -->
+
+            <div class="level">
+
+                <div class="level-number">
+                    LEVEL 5
+                </div>
+
+                <div class="level-icon">
+                    🔴
+                </div>
+
+                <h3>
+                    Create It
+                </h3>
+
+                <p>
+                    Make your own
+                    picture.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BOSS LEVEL -->
+
+        <div class="boss">
+
+            <div class="boss-title">
+                🏆 Boss Level
+            </div>
+
+
+            <h3>
+                Your Masterpiece
+            </h3>
+
+
+            <p>
+
+                Use at least 5 shapes
+
+                and 3 colours.
+
+                Give your picture a name.
+
+                Can someone else guess
+
+                what you made?
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         QUICK LINKS
+    ====================================================== -->
+
+    <section class="quick-links">
+
+
+        <div class="section-title">
+
+            <h2>
+                Want to explore more?
+            </h2>
+
+
+            <p>
+                Pick another coding rabbit hole.
+            </p>
+
+        </div>
+
+
+
+        <div class="quick-grid">
+
+
+            <a
+                href="#"
+                class="quick-link"
+            >
+                🌐 HTML & CSS
+            </a>
+
+
+            <a
+                href="#"
+                class="quick-link"
+            >
+                🐍 Python
+            </a>
+
+
+            <a
+                href="#"
+                class="quick-link"
+            >
+                🤖 AI & Coding
+            </a>
+
+
+            <a
+                href="#"
+                class="quick-link"
+            >
+                🔐 Cryptography
+            </a>
+
+
+            <a
+                href="#"
+                class="quick-link"
+            >
+                🧠 Algorithms
+            </a>
+
+
+            <a
+                href="#"
+                class="quick-link"
+            >
+                🐛 Bug Hunting
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div class="credit">
+
+        Code Club 2026 · Designed by Ching
+
+    </div>
+
+
+</main>
+```
+
+</body>
+
+</html>
