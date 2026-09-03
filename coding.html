@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teen Learning Portal | Coding</title>
+
+    <style>
+
+        /* =========================================================
+           BASIC RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080b18;
+            color: #f5f7ff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================================
+           BACKGROUND
+        ========================================================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+
+        /* Floating blobs */
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+        }
+
+        .blob.one {
+            width: 350px;
+            height: 350px;
+            background: #7c3aed;
+            top: -120px;
+            left: -100px;
+        }
+
+        .blob.two {
+            width: 300px;
+            height: 300px;
+            background: #06b6d4;
+            top: 45%;
+            right: -100px;
+        }
+
+        .blob.three {
+            width: 280px;
+            height: 280px;
+            background: #ec4899;
+            bottom: -120px;
+            left: 35%;
+        }
+
+
+        /* Floating formulas / code */
+
+        .formula {
+            position: absolute;
+            font-family: Georgia, serif;
+            font-style: italic;
+            opacity: 0.13;
+            white-space: nowrap;
+        }
+
+        .code-symbol {
+            position: absolute;
+            font-family: "Courier New", monospace;
+            opacity: 0.14;
+            white-space: nowrap;
+        }
+
+
+        .formula.one {
+            top: 12%;
+            left: 5%;
+            font-size: 2rem;
+        }
+
+        .formula.two {
+            top: 30%;
+            right: 6%;
+            font-size: 1.8rem;
+        }
+
+        .formula.three {
+            bottom: 22%;
+            left: 8%;
+            font-size: 2.2rem;
+        }
+
+        .formula.four {
+            bottom: 8%;
+            right: 10%;
+            font-size: 1.6rem;
+        }
+
+
+        .code-symbol.one {
+            top: 20%;
+            left: 45%;
+            font-size: 1.3rem;
+        }
+
+        .code-symbol.two {
+            top: 65%;
+            right: 38%;
+            font-size: 1.2rem;
+        }
+
+        .code-symbol.three {
+            bottom: 15%;
+            left: 45%;
+            font-size: 1.4rem;
+        }
+
+
+        /* =========================================================
+           MAIN CONTAINER
+        ========================================================= */
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: min(1150px, 92%);
+            margin: auto;
+            padding: 30px 0 50px;
+        }
+
+
+        /* =========================================================
+           TOP NAVIGATION
+        ========================================================= */
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #c4b5fd;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 18px;
+            border: 1px solid rgba(196, 181, 253, 0.35);
+            border-radius: 30px;
+            background: rgba(20, 15, 45, 0.65);
+            transition: 0.25s ease;
+        }
+
+        .back-link:hover {
+            color: white;
+            border-color: #a78bfa;
+            transform: translateX(-4px);
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #67e8f9;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            text-align: center;
+            padding: 35px 20px 55px;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px rgba(103, 232, 249, 0.5));
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            line-height: 0.95;
+            margin-bottom: 20px;
+
+            background: linear-gradient(
+                90deg,
+                #a78bfa,
+                #67e8f9,
+                #f0abfc
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           SECTION
+        ========================================================= */
+
+        .section-title {
+            margin: 30px 0 20px;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+
+
+        /* =========================================================
+           MAIN CARDS
+        ========================================================= */
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            position: relative;
+            min-height: 230px;
+            padding: 30px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(30, 25, 65, 0.94),
+                    rgba(10, 15, 35, 0.92)
+                );
+
+            border: 1px solid rgba(167, 139, 250, 0.2);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+
+            background: #7c3aed;
+
+            filter: blur(55px);
+            opacity: 0.35;
+
+            right: -30px;
+            top: -30px;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(103, 232, 249, 0.55);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #aeb8ca;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #67e8f9;
+            font-weight: bold;
+            border-bottom: 1px solid transparent;
+        }
+
+        .card-link:hover {
+            border-bottom-color: #67e8f9;
+        }
+
+
+        /* =========================================================
+           MINI CHALLENGE
+        ========================================================= */
+
+        .challenge {
+            margin-top: 45px;
+
+            padding: 30px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(88, 28, 135, 0.55),
+                    rgba(8, 47, 73, 0.55)
+                );
+
+            border: 1px solid rgba(103, 232, 249, 0.25);
+
+            text-align: center;
+        }
+
+        .challenge-label {
+            color: #f0abfc;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .challenge h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .challenge p {
+            color: #d4dbea;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        .challenge-button {
+            display: inline-block;
+            margin-top: 22px;
+
+            padding: 12px 25px;
+
+            border-radius: 30px;
+
+            background: #a78bfa;
+            color: #0b0718;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            transition: 0.25s ease;
+        }
+
+        .challenge-button:hover {
+            background: #67e8f9;
+            transform: scale(1.04);
+        }
+
+
+        /* =========================================================
+           QUICK LINKS
+        ========================================================= */
+
+        .quick-links {
+            margin-top: 45px;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .quick-link {
+            display: block;
+
+            padding: 18px;
+
+            text-align: center;
+
+            border-radius: 16px;
+
+            text-decoration: none;
+
+            color: #dbeafe;
+
+            background: rgba(20, 25, 50, 0.75);
+
+            border: 1px solid rgba(148, 163, 184, 0.15);
+
+            transition: 0.25s ease;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-4px);
+            border-color: #67e8f9;
+            color: white;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .credit {
+            text-align: center;
+            margin-top: 60px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 750px) {
+
+            .top-bar {
+                margin-bottom: 25px;
+            }
+
+            .section-label {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 20px;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================================================
+         BACKGROUND
+    ========================================================= -->
+
+    <div class="background">
+
+        <div class="blob one"></div>
+        <div class="blob two"></div>
+        <div class="blob three"></div>
+
+        <div class="formula one">
+            y = sin(x)
+        </div>
+
+        <div class="formula two">
+            E = mc²
+        </div>
+
+        <div class="formula three">
+            ∑ f(x)
+        </div>
+
+        <div class="formula four">
+            π ≈ 3.14159
+        </div>
+
+        <div class="code-symbol one">
+            &lt;/&gt;
+        </div>
+
+        <div class="code-symbol two">
+            if (x &gt; 0) { ... }
+        </div>
+
+        <div class="code-symbol three">
+            R U2 R' U' R U' R'
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         CONTENT
+    ========================================================= -->
+
+    <main class="container">
+
+
+        <!-- TOP BAR -->
+
+        <div class="top-bar">
+
+            <a href="index.html" class="back-link">
+                ← Teen Hub
+            </a>
+
+            <div class="section-label">
+                Level Up Your Skills
+            </div>
+
+        </div>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-icon">
+                💻
+            </div>
+
+            <h1>CODING</h1>
+
+            <p>
+                Don't just use technology.
+                Learn how to make it do things.
+                Experiment, break things, fix them,
+                and build something that is yours.
+            </p>
+
+        </section>
+
+
+        <!-- LEARNING CARDS -->
+
+        <div class="section-title">
+
+            <h2>Choose your route</h2>
+
+            <p>
+                Start somewhere. Experiment. Level up.
+            </p>
+
+        </div>
+
+
+        <section class="card-grid">
+
+
+            <!-- LEARN -->
+
+            <article class="card">
+
+                <div class="card-icon">
+                    🧠
+                </div>
+
+                <h3>Learn</h3>
+
+                <p>
+                    Build your coding foundations.
+                    Explore algorithms, variables,
+                    loops, conditions and problem solving.
+                </p>
+
+                <a href="#" class="card-link">
+                    Start learning →
+                </a>
+
+            </article>
+
+
+            <!-- MAKE -->
+
+            <article class="card">
+
+                <div class="card-icon">
+                    🛠️
+                </div>
+
+                <h3>Make Something</h3>
+
+                <p>
+                    Turn an idea into a real project.
+                    Games, animations, websites,
+                    simulations or something completely weird.
+                </p>
+
+                <a href="#" class="card-link">
+                    Start creating →
+                </a>
+
+            </article>
+
+
+            <!-- EXPERIMENT -->
+
+            <article class="card">
+
+                <div class="card-icon">
+                    🧪
+                </div>
+
+                <h3>Experiment</h3>
+
+                <p>
+                    Change the code.
+                    See what happens.
+                    Make predictions before you run it.
+                </p>
+
+                <a href="#" class="card-link">
+                    Try an experiment →
+                </a>
+
+            </article>
+
+
+            <!-- PROJECTS -->
+
+            <article class="card">
+
+                <div class="card-icon">
+                    🚀
+                </div>
+
+                <h3>Projects</h3>
+
+                <p>
+                    Ready for something bigger?
+                    Take on a project and build
+                    something you can show other people.
+                </p>
+
+                <a href="#" class="card-link">
+                    View projects →
+                </a>
+
+            </article>
+
+        </section>
+
+
+        <!-- =====================================================
+             CHALLENGE
+        ====================================================== -->
+
+        <section class="challenge">
+
+            <div class="challenge-label">
+                ⚡ Quick Challenge
+            </div>
+
+            <h2>Can you break the code?</h2>
+
+            <p>
+                You have a piece of code that isn't doing
+                what it should. Find the bug, work out why
+                it happens, and fix it.
+            </p>
+
+            <a href="#" class="challenge-button">
+                Take the challenge
+            </a>
+
+        </section>
+
+
+        <!-- =====================================================
+             QUICK LINKS
+        ====================================================== -->
+
+        <section class="quick-links">
+
+            <div class="section-title">
+
+                <h2>Useful stuff</h2>
+
+                <p>
+                    Tools and places to keep exploring.
+                </p>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <a href="#" class="quick-link">
+                    🌐 Web Coding
+                </a>
+
+                <a href="#" class="quick-link">
+                    🧩 Coding Puzzles
+                </a>
+
+                <a href="#" class="quick-link">
+                    🎮 Game Design
+                </a>
+
+                <a href="#" class="quick-link">
+                    🤖 Python
+                </a>
+
+                <a href="#" class="quick-link">
+                    🔐 Cryptography
+                </a>
+
+                <a href="#" class="quick-link">
+                    🧠 Algorithms
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <div class="credit">
+
+            Code Club 2026 · Designed by Ching
+
+        </div>
+
+
+    </main>
+
+</body>
+</html>
