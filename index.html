@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teen Learning Portal</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            min-height: 100vh;
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(100, 60, 255, 0.25),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(0, 220, 255, 0.20),
+                    transparent 25%
+                ),
+                #02091f;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================
+           ABSTRACT BACKGROUND
+        ========================================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .formula {
+            position: absolute;
+
+            font-family: Georgia, serif;
+            font-style: italic;
+
+            opacity: 0.16;
+            white-space: nowrap;
+        }
+
+        .formula:nth-child(1) {
+            top: 8%;
+            left: 5%;
+            font-size: 42px;
+            color: #38e8ff;
+        }
+
+        .formula:nth-child(2) {
+            top: 20%;
+            right: 4%;
+            font-size: 38px;
+            color: #a66cff;
+        }
+
+        .formula:nth-child(3) {
+            top: 52%;
+            left: 2%;
+            font-size: 55px;
+            color: #ff52db;
+        }
+
+        .formula:nth-child(4) {
+            bottom: 18%;
+            right: 7%;
+            font-size: 38px;
+            color: #28e7d3;
+        }
+
+        .formula:nth-child(5) {
+            bottom: 7%;
+            left: 8%;
+            font-size: 35px;
+            color: #8b7cff;
+        }
+
+         .formula:nth-child(6) {
+            top: 4%;
+            right: 8%;
+            font-size: 35px;
+            color: #7cc4ff;
+        }       
+        .formula:nth-child(7) {
+            top: 35%;
+            left: 18%;
+            font-size: 40px;
+            color: #918ac3;
+        }
+        .formula:nth-child(8) {
+            top: 7%;
+            left: 8%;
+            font-size: 42px;
+            color: #acff7c;
+        }
+        .formula:nth-child(9) {
+            top: 25%;
+            right: 8%;
+            font-size: 27px;
+            color: #acff7c;
+        }
+
+        /* Floating glowing shapes */
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(10px);
+            opacity: 0.35;
+        }
+
+        .blob.one {
+            width: 300px;
+            height: 300px;
+            background: #632cff;
+            top: -170px;
+            left: -100px;
+        }
+
+        .blob.two {
+            width: 280px;
+            height: 280px;
+            background: #00d9ff;
+            bottom: -150px;
+            right: -100px;
+        }
+
+        .blob.three {
+            width: 180px;
+            height: 180px;
+            background: #ff27d8;
+            top: 45%;
+            right: -100px;
+        }
+
+
+        /* =========================================
+           MAIN CONTENT
+        ========================================= */
+
+        .container {
+            position: relative;
+            z-index: 1;
+
+            width: min(1150px, 92%);
+            margin: auto;
+
+            padding: 55px 0 60px;
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .eyebrow {
+            text-align: center;
+
+            color: #22e6d5;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            letter-spacing: 5px;
+
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            text-align: center;
+
+            font-size: clamp(52px, 8vw, 88px);
+
+            font-weight: 850;
+
+            letter-spacing: -4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #45e6ff,
+                    #9b63ff,
+                    #ff4ed9
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .underline {
+            width: 380px;
+            max-width: 80%;
+
+            height: 7px;
+
+            margin: 5px auto 20px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #16e5d1,
+                    #775cff,
+                    #ff48d5
+                );
+
+            box-shadow:
+                0 0 25px rgba(60, 220, 255, 0.35);
+        }
+
+        .intro {
+            text-align: center;
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #aebddd;
+
+            font-size: 18px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           CATEGORY GRID
+        ========================================= */
+
+        .categories {
+
+            margin-top: 55px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 24px;
+        }
+
+
+        /* =========================================
+           CATEGORY CARD
+        ========================================= */
+
+        .category {
+
+            position: relative;
+
+            min-height: 255px;
+
+            padding: 30px;
+
+            text-decoration: none;
+
+            color: white;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16, 35, 90, 0.95),
+                    rgba(4, 15, 46, 0.96)
+                );
+
+            border: 1px solid
+                rgba(110, 150, 255, 0.28);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        /* Accent strip */
+
+        .category::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 6px;
+            height: 100%;
+
+            background: var(--accent);
+        }
+
+
+        /* Glow */
+
+        .category::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            opacity: 0.07;
+
+            filter: blur(25px);
+
+            right: -70px;
+            top: -70px;
+        }
+
+
+        .category:hover {
+
+            transform:
+                translateY(-9px)
+                scale(1.01);
+
+            border-color:
+                var(--accent);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.35),
+
+                0 0 30px
+                var(--glow);
+        }
+
+
+        /* =========================================
+           ICON
+        ========================================= */
+
+        .category-icon {
+
+            width: 68px;
+            height: 68px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 19px;
+
+            font-size: 34px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            box-shadow:
+                0 0 22px var(--glow);
+
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================================
+           TEXT
+        ========================================= */
+
+        .category h2 {
+
+            font-size: 27px;
+
+            margin-bottom: 9px;
+        }
+
+        .category p {
+
+            color: #aebde0;
+
+            line-height: 1.5;
+
+            font-size: 15px;
+
+            max-width: 280px;
+        }
+
+
+        /* =========================================
+           EXPLORE BUTTON
+        ========================================= */
+
+        .explore {
+
+            position: absolute;
+
+            bottom: 25px;
+            left: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color: var(--accent);
+
+            font-weight: 700;
+
+            font-size: 15px;
+        }
+
+        .arrow {
+
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            color: #04102c;
+
+            font-weight: 900;
+
+            transition:
+                transform 0.2s ease;
+        }
+
+        .category:hover .arrow {
+
+            transform:
+                translateX(5px)
+                rotate(-8deg);
+        }
+
+
+        /* =========================================
+           COLOUR THEMES
+        ========================================= */
+
+        .coding {
+            --accent: #21e6d3;
+            --glow: rgba(33,230,211,0.35);
+        }
+
+        .math {
+            --accent: #9a67ff;
+            --glow: rgba(154,103,255,0.35);
+        }
+
+        .engineering {
+            --accent: #ffc928;
+            --glow: rgba(255,201,40,0.35);
+        }
+
+        .create {
+            --accent: #ff4ed8;
+            --glow: rgba(255,78,216,0.35);
+        }
+
+        .ai {
+            --accent: #35aaff;
+            --glow: rgba(53,170,255,0.35);
+        }
+
+        .challenges {
+            --accent: #35e58b;
+            --glow: rgba(53,229,139,0.35);
+        }
+
+
+        /* =========================================
+           BOTTOM MESSAGE
+        ========================================= */
+
+        .bottom-message {
+
+            text-align: center;
+
+            margin-top: 55px;
+
+            color: #8192b8;
+
+            font-size: 15px;
+        }
+
+        .bottom-message strong {
+
+            color: #dce7ff;
+        }
+
+        .rocket {
+
+            display: inline-block;
+
+            margin-left: 6px;
+
+            font-size: 20px;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .categories {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .container {
+
+                padding-top: 35px;
+            }
+
+            .categories {
+
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+            .category {
+
+                min-height: 230px;
+            }
+
+            h1 {
+
+                letter-spacing: -2px;
+            }
+
+            .formula {
+
+                font-size: 25px !important;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         ABSTRACT BACKGROUND
+    ========================================== -->
+
+    <div class="background">
+
+        <div class="blob one"></div>
+        <div class="blob two"></div>
+        <div class="blob three"></div>
+
+        <div class="formula">
+            a² + b² = c²
+        </div>
+
+        <div class="formula">
+            y = sin(x)
+        </div>
+
+        <div class="formula">
+            π ≈ 3.14159
+        </div>
+
+        <div class="formula">
+            E = mc²
+        </div>
+
+        <div class="formula">
+            ∑ f(x)
+        </div>
+        <div class="formula">
+            R U2 R' U' R U' R'
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         PAGE
+    ========================================== -->
+
+    <main class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="eyebrow">
+            ✦ LEARN • CREATE • EXPERIMENT ✦
+        </div>
+
+        <h1>
+            TEEN HUB
+        </h1>
+
+        <div class="underline"></div>
+
+        <p class="intro">
+            Discover cool tools, learn new skills,
+            solve problems and build something amazing.
+        </p>
+
+
+        <!-- =========================================
+             CATEGORY CARDS
+        ========================================== -->
+
+        <section class="categories">
+
+
+            <!-- CODING -->
+
+            <a
+                href="#coding"
+                class="category coding"
+            >
+
+                <div class="category-icon">
+                    &lt;/&gt;
+                </div>
+
+                <h2>
+                    Coding
+                </h2>
+
+                <p>
+                    Learn to code, build websites,
+                    make games and turn ideas into
+                    something real.
+                </p>
+
+                <div class="explore">
+                    Explore
+                    <span class="arrow">→</span>
+                </div>
+
+            </a>
+
+
+            <!-- MATH -->
+
+            <a
+                href="#math"
+                class="category math"
+            >
+
+                <div class="category-icon">
+                    ∑
+                </div>
+
+                <h2>
+                    Math
+                </h2>
+
+                <p>
+                    Explore numbers, patterns,
+                    puzzles, graphs and mathematical
+                    ideas.
+                </p>
+
+                <div class="explore">
+                    Explore
+                    <span class="arrow">→</span>
+                </div>
+
+            </a>
+
+
+            <!-- ENGINEERING -->
+
+            <a
+                href="#engineering"
+                class="category engineering"
+            >
+
+                <div class="category-icon">
+                    ⚙
+                </div>
+
+                <h2>
+                    Engineering
+                </h2>
+
+                <p>
+                    Design, build and experiment with
+                    technology, electronics, machines
+                    and inventions.
+                </p>
+
+                <div class="explore">
+                    Explore
+                    <span class="arrow">→</span>
+                </div>
+
+            </a>
+
+
+            <!-- CREATE -->
+
+            <a
+                href="#create"
+                class="category create"
+            >
+
+                <div class="category-icon">
+                    ✦
+                </div>
+
+                <h2>
+                    Create
+                </h2>
+
+                <p>
+                    Design graphics, make animations,
+                    edit images and turn your creativity
+                    into projects.
+                </p>
+
+                <div class="explore">
+                    Create
+                    <span class="arrow">→</span>
+                </div>
+
+            </a>
+
+
+            <!-- AI -->
+
+            <a
+                href="#ai"
+                class="category ai"
+            >
+
+                <div class="category-icon">
+                    ✨
+                </div>
+
+                <h2>
+                    AI
+                </h2>
+
+                <p>
+                    Discover artificial intelligence,
+                    experiment with AI tools and learn
+                    how the technology works.
+                </p>
+
+                <div class="explore">
+                    Discover
+                    <span class="arrow">→</span>
+                </div>
+
+            </a>
+
+
+            <!-- CHALLENGES -->
+
+            <a
+                href="#challenges"
+                class="category challenges"
+            >
+
+                <div class="category-icon">
+                    🚀
+                </div>
+
+                <h2>
+                    Challenges
+                </h2>
+
+                <p>
+                    Ready for a challenge? Solve puzzles,
+                    crack codes, test your logic and
+                    compete against yourself.
+                </p>
+
+                <div class="explore">
+                    Take the challenge
+                    <span class="arrow">→</span>
+                </div>
+
+            </a>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <div class="bottom-message">
+
+            <strong>
+                Curious minds go further.   
+            </strong>
+
+            <span class="rocket">
+                🚀
+            </span>
+            <center>
+                <p>
+                    Code Club 2026, Designed by Ching 
+                </p>
+            </center>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
