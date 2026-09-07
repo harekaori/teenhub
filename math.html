@@ -1,480 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Math Lab | Teen Hub</title>
-
-    <!-- Shared Teen Hub styling -->
     <link rel="stylesheet" href="style.css">
 </head>
+<body class="math-page">
 
-<body>
-
-    <!-- =========================================
-         ABSTRACT BACKGROUND
-    ========================================== -->
-
-    <div class="background">
-
+    <div class="background" aria-hidden="true">
         <div class="blob one"></div>
         <div class="blob two"></div>
         <div class="blob three"></div>
 
-        <div class="formula formula-one">
-            a² + b² = c²
-        </div>
-
-        <div class="formula formula-two">
-            y = sin(x)
-        </div>
-
-        <div class="formula formula-three">
-            π ≈ 3.14159
-        </div>
-
-        <div class="formula formula-four">
-            E = mc²
-        </div>
-
-        <div class="formula formula-five">
-            ∑ f(x)
-        </div>
-
-        <div class="formula formula-six">
-            x² + y²
-        </div>
-
-        <div class="formula formula-seven">
-            3 × 7 = ?
-        </div>
-
-        <div class="formula formula-eight">
-            ∞
-        </div>
-
-        <div class="formula formula-nine">
-            2, 4, 8, 16...
-        </div>
-
+        <div class="formula formula-one">a² + b² = c²</div>
+        <div class="formula formula-two">y = sin(x)</div>
+        <div class="formula formula-three">π ≈ 3.14159</div>
+        <div class="formula formula-four">E = mc²</div>
+        <div class="formula formula-five">∑ f(x)</div>
+        <div class="formula formula-six">R U2 R' U' R U' R'</div>
     </div>
 
+    <main class="math-container">
 
-    <!-- =========================================
-         MATH LAB
-    ========================================== -->
-
-    <main class="container math-page">
-
-
-        <!-- =====================================
-             CATEGORY SCREEN
-        ====================================== -->
-
+        <!-- CATEGORY HOME -->
         <section id="category-screen" class="math-screen">
+            <a class="math-back-link" href="index.html">← Teen Hub</a>
 
-            <div class="eyebrow">
-                ✦ THINK • EXPERIMENT • SOLVE ✦
-            </div>
+            <header class="math-hero">
+                <div class="math-eyebrow">✦ THINK • EXPERIMENT • SOLVE ✦</div>
+                <h1>MATH LAB</h1>
+                <div class="math-underline"></div>
+                <p>Choose a challenge, crack the pattern and level up your maths skills.</p>
+            </header>
 
-            <h1>
-                MATH LAB
-            </h1>
+            <section class="math-category-grid" aria-label="Math challenges">
 
-            <div class="underline"></div>
-
-            <p class="intro">
-                Explore patterns, shapes and puzzles.
-                Start easy, level up and see how far you can go.
-            </p>
-
-
-            <!-- =================================
-                 MATH CATEGORY CARDS
-            ================================== -->
-
-            <section class="math-categories">
-
-
-                <!-- NUMBER PATTERNS -->
-
-                <button
-                    class="math-category math-patterns"
-                    data-category="patterns"
-                >
-
-                    <div class="math-category-icon">
-                        🔢
-                    </div>
-
-                    <h2>
-                        Number Patterns
-                    </h2>
-
-                    <p>
-                        Spot the pattern, find the rule
-                        and work out what comes next.
-                    </p>
-
-                    <div class="math-progress">
-                        <span id="patterns-progress">
-                            ★☆☆☆☆
+                <button class="math-category math-category-patterns" data-category="patterns">
+                    <span class="math-card-icon">🔢</span>
+                    <span class="math-card-content">
+                        <span class="math-card-title">Number Patterns</span>
+                        <span class="math-card-description">Spot the rule. Predict what comes next. Then crack harder patterns.</span>
+                        <span class="math-card-meta">
+                            <span id="patterns-progress">★☆☆☆☆</span>
+                            <span id="patterns-level">LEVEL 1</span>
                         </span>
-                    </div>
-
-                    <div class="math-category-level">
-                        Level <span id="patterns-level">1</span>
-                    </div>
-
-                    <div class="math-start">
-                        START
-                        <span class="arrow">→</span>
-                    </div>
-
+                        <span class="math-card-action">START <span>→</span></span>
+                    </span>
                 </button>
 
-
-                <!-- SHAPES -->
-
-                <button
-                    class="math-category math-shapes"
-                    data-category="shapes"
-                >
-
-                    <div class="math-category-icon">
-                        🔷
-                    </div>
-
-                    <h2>
-                        Shapes
-                    </h2>
-
-                    <p>
-                        Explore angles, symmetry, shapes
-                        and visual patterns.
-                    </p>
-
-                    <div class="math-progress">
-                        <span id="shapes-progress">
-                            ★☆☆☆☆
+                <button class="math-category math-category-shapes" data-category="shapes">
+                    <span class="math-card-icon">🔷</span>
+                    <span class="math-card-content">
+                        <span class="math-card-title">Shapes</span>
+                        <span class="math-card-description">Explore angles, symmetry, properties and the secrets hidden in shapes.</span>
+                        <span class="math-card-meta">
+                            <span id="shapes-progress">★☆☆☆☆</span>
+                            <span id="shapes-level">LEVEL 1</span>
                         </span>
-                    </div>
-
-                    <div class="math-category-level">
-                        Level <span id="shapes-level">1</span>
-                    </div>
-
-                    <div class="math-start">
-                        START
-                        <span class="arrow">→</span>
-                    </div>
-
+                        <span class="math-card-action">START <span>→</span></span>
+                    </span>
                 </button>
 
-
-                <!-- 3D SHAPES -->
-
-                <button
-                    class="math-category math-threeD"
-                    data-category="threeD"
-                >
-
-                    <div class="math-category-icon">
-                        🧊
-                    </div>
-
-                    <h2>
-                        3D Shapes
-                    </h2>
-
-                    <p>
-                        Think in three dimensions.
-                        Explore cubes, pyramids and more.
-                    </p>
-
-                    <div class="math-progress">
-                        <span id="threeD-progress">
-                            ★☆☆☆☆
+                <button class="math-category math-category-3d" data-category="threeD">
+                    <span class="math-card-icon">🧊</span>
+                    <span class="math-card-content">
+                        <span class="math-card-title">3D Shapes</span>
+                        <span class="math-card-description">Think in three dimensions. Faces, edges, vertices and visual puzzles.</span>
+                        <span class="math-card-meta">
+                            <span id="threeD-progress">★☆☆☆☆</span>
+                            <span id="threeD-level">LEVEL 1</span>
                         </span>
-                    </div>
-
-                    <div class="math-category-level">
-                        Level <span id="threeD-level">1</span>
-                    </div>
-
-                    <div class="math-start">
-                        START
-                        <span class="arrow">→</span>
-                    </div>
-
+                        <span class="math-card-action">START <span>→</span></span>
+                    </span>
                 </button>
 
-
-                <!-- MATH PUZZLES -->
-
-                <button
-                    class="math-category math-puzzles"
-                    data-category="puzzles"
-                >
-
-                    <div class="math-category-icon">
-                        🧩
-                    </div>
-
-                    <h2>
-                        Math Puzzles
-                    </h2>
-
-                    <p>
-                        Crack tricky problems, test your logic
-                        and think outside the box.
-                    </p>
-
-                    <div class="math-progress">
-                        <span id="puzzles-progress">
-                            ★☆☆☆☆
+                <button class="math-category math-category-puzzles" data-category="puzzles">
+                    <span class="math-card-icon">🧩</span>
+                    <span class="math-card-content">
+                        <span class="math-card-title">Math Puzzles</span>
+                        <span class="math-card-description">Use logic, clues and clever thinking to solve problems that don't look obvious.</span>
+                        <span class="math-card-meta">
+                            <span id="puzzles-progress">★☆☆☆☆</span>
+                            <span id="puzzles-level">LEVEL 1</span>
                         </span>
-                    </div>
-
-                    <div class="math-category-level">
-                        Level <span id="puzzles-level">1</span>
-                    </div>
-
-                    <div class="math-start">
-                        START
-                        <span class="arrow">→</span>
-                    </div>
-
+                        <span class="math-card-action">START <span>→</span></span>
+                    </span>
                 </button>
 
             </section>
 
-
-            <!-- FOOTER -->
-
-            <div class="bottom-message">
-
-                <strong>
-                    Don't just calculate. Think. 🚀
-                </strong>
-
-            </div>
-
+            <p class="math-footer-message"><strong>There is more than one way to be good at maths.</strong> 🚀</p>
         </section>
 
+        <!-- GAME SCREEN -->
+        <section id="game-screen" class="math-screen" hidden>
+            <div class="math-game-topbar">
+                <button id="game-back" class="math-small-button" type="button">← BACK</button>
+                <div class="math-game-heading">
+                    <div id="category-title">🔢 Number Patterns</div>
+                    <div id="level-title">LEVEL 1</div>
+                </div>
+                <div id="level-stars" class="math-level-stars" aria-label="Level progress">★☆☆☆☆</div>
+            </div>
 
-        <!-- =========================================
-             GAME SCREEN
-        ========================================== -->
+            <div class="math-challenge-card">
+                <div class="math-challenge-top">
+                    <span id="challenge-number">CHALLENGE 1 / 4</span>
+                    <div id="challenge-progress" class="math-progress-dots" aria-label="Challenge progress"></div>
+                </div>
 
-        <section
-            id="game-screen"
-            class="math-screen"
-            style="display: none;"
-        >
+                <div class="math-question-area">
+                    <p class="math-question-label">YOUR MISSION</p>
+                    <h2 id="question">What comes next?</h2>
+                    <div id="challenge-display" class="math-challenge-display"></div>
+                </div>
 
+                <div id="answer-options" class="math-answer-grid"></div>
 
-            <!-- GAME HEADER -->
+                <div id="feedback" class="math-feedback" hidden>
+                    <div id="feedback-icon" class="math-feedback-icon">🎉</div>
+                    <div>
+                        <h3 id="feedback-message">NICE!</h3>
+                        <p id="feedback-explanation"></p>
+                    </div>
+                </div>
 
-            <div class="game-header">
-
-                <button
-                    id="game-back"
-                    class="back-button"
-                    type="button"
-                >
-                    ← BACK
+                <button id="continue-button" class="math-primary-button" type="button" hidden>
+                    NEXT CHALLENGE →
                 </button>
-
-                <div class="game-title">
-
-                    <div id="category-title">
-                        🔢 Number Patterns
-                    </div>
-
-                    <div id="level-title">
-                        LEVEL 1
-                    </div>
-
-                </div>
-
-                <div
-                    id="level-stars"
-                    class="level-stars"
-                >
-                    ★☆☆☆☆
-                </div>
-
             </div>
-
-
-            <!-- CHALLENGE -->
-
-            <div class="challenge-card">
-
-
-                <!-- CHALLENGE NUMBER -->
-
-                <div
-                    id="challenge-number"
-                    class="challenge-number"
-                >
-                    CHALLENGE 1 / 4
-                </div>
-
-
-                <!-- PROGRESS DOTS -->
-
-                <div
-                    id="challenge-progress"
-                    class="challenge-progress"
-                >
-                    <span class="progress-dot active"></span>
-                    <span class="progress-dot"></span>
-                    <span class="progress-dot"></span>
-                    <span class="progress-dot"></span>
-                </div>
-
-
-                <!-- QUESTION -->
-
-                <h2 id="question">
-                    What comes next?
-                </h2>
-
-
-                <!-- DISPLAY -->
-
-                <div
-                    id="challenge-display"
-                    class="challenge-display"
-                >
-                    2&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;?
-                </div>
-
-
-                <!-- ANSWERS -->
-
-                <div
-                    id="answer-options"
-                    class="answer-options"
-                >
-                    <!-- JavaScript creates answer buttons here -->
-                </div>
-
-
-                <!-- FEEDBACK -->
-
-                <div
-                    id="feedback"
-                    class="feedback"
-                    style="display: none;"
-                >
-
-                    <div
-                        id="feedback-icon"
-                        class="feedback-icon"
-                    >
-                        🎉
-                    </div>
-
-                    <h3 id="feedback-title">
-                        NICE!
-                    </h3>
-
-                    <p id="feedback-message">
-                        Great thinking!
-                    </p>
-
-                    <button
-                        id="continue-button"
-                        class="math-button"
-                        type="button"
-                    >
-                        NEXT CHALLENGE →
-                    </button>
-
-                </div>
-
-            </div>
-
         </section>
 
-
-        <!-- =========================================
-             LEVEL COMPLETE SCREEN
-        ========================================== -->
-
-        <section
-            id="level-complete"
-            class="math-screen level-complete"
-            style="display: none;"
-        >
-
-            <div class="complete-icon">
-                🏆
+        <!-- LEVEL COMPLETE -->
+        <section id="level-complete" class="math-screen math-complete-screen" hidden>
+            <div class="math-complete-card">
+                <div class="math-complete-icon">🏆</div>
+                <p class="math-eyebrow">LEVEL COMPLETE</p>
+                <h2 id="level-complete-title">YOU CRACKED IT!</h2>
+                <div id="level-complete-stars" class="math-complete-stars">★★☆☆☆</div>
+                <p id="level-complete-message">You cracked all 4 challenges.</p>
+                <div class="math-complete-actions">
+                    <button id="next-level-button" class="math-primary-button" type="button">LEVEL 2 →</button>
+                    <button id="return-home-button" class="math-secondary-button" type="button">← MATH LAB</button>
+                </div>
             </div>
-
-            <div class="eyebrow">
-                LEVEL COMPLETE
-            </div>
-
-            <h1>
-                NICE WORK!
-            </h1>
-
-            <div class="underline"></div>
-
-            <p
-                id="level-complete-message"
-                class="intro"
-            >
-                You cracked all 4 challenges.
-                Score: 4/4
-            </p>
-
-            <div
-                id="complete-stars"
-                class="complete-stars"
-            >
-                ★★☆☆☆
-            </div>
-
-
-            <!-- NEXT LEVEL -->
-
-            <button
-                id="next-level-button"
-                class="math-button primary"
-                type="button"
-            >
-                LEVEL 2 →
-            </button>
-
-
-            <!-- RETURN HOME -->
-
-            <button
-                id="return-home-button"
-                class="math-button secondary"
-                type="button"
-            >
-                ← MATH LAB
-            </button>
-
         </section>
 
     </main>
 
-
-    <!-- =========================================
-         GAME ENGINE
-    ========================================== -->
-
     <script src="math.js"></script>
-
 </body>
-
 </html>
