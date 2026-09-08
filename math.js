@@ -398,10 +398,11 @@ function showChallenge() {
 
 function createAnswerButtons(options) {
 
-    const container =
+    const answerContainer =
         document.getElementById("answer-options");
 
-    container.innerHTML = "";
+
+    answerContainer.innerHTML = "";
 
 
     options.forEach(option => {
@@ -418,7 +419,7 @@ function createAnswerButtons(options) {
             () => checkAnswer(option)
         );
 
-        container.appendChild(button);
+        answerContainer.appendChild(button);
 
     });
 }
@@ -430,7 +431,9 @@ function createAnswerButtons(options) {
 
 function checkAnswer(selectedAnswer) {
 
-    const challenge = getCurrentChallenge();
+    const challenge =
+        getCurrentChallenge();
+
 
     if (!challenge) {
         return;
@@ -484,7 +487,7 @@ function showCorrectFeedback(explanation) {
     explanationText.textContent =
         explanation;
 
-    continueButton.style.display = "inline-flex";
+    continueButton.hidden = false;
 
     feedback.classList.remove("wrong");
 
@@ -523,7 +526,7 @@ function showWrongFeedback() {
     explanationText.textContent =
         "Have another look at the pattern and try again.";
 
-    continueButton.style.display = "none";
+    continueButton.hidden = true;
 
     feedback.classList.remove("correct");
 
@@ -668,16 +671,16 @@ function updateChallengeProgress() {
         const dot =
             document.createElement("span");
 
-        dot.className = "progress-dot";
+        dot.className = "math-progress-dot";
 
 
         if (index < currentChallenge) {
 
-            dot.classList.add("complete");
+            dot.classList.add("done");
 
         } else if (index === currentChallenge) {
 
-            dot.classList.add("current");
+            dot.classList.add("active");
 
         }
 
@@ -729,7 +732,7 @@ function showLevelComplete() {
         `You cracked all 4 challenges. Score: ${score}/4`;
 
 
-    document.getElementById("complete-stars")
+    document.getElementById("level-complete-stars")
         .textContent =
         createStars(currentLevel);
 
@@ -738,7 +741,7 @@ function showLevelComplete() {
         document.getElementById("next-level-button");
 
 
-    nextLevelButton.style.display = "inline-flex";
+    nextLevelButton.hidden = false;
 
     nextLevelButton.textContent =
         `LEVEL ${currentLevel + 1} →`;
@@ -767,13 +770,13 @@ function showCategoryComplete() {
         "You completed all 5 levels!";
 
 
-    document.getElementById("complete-stars")
+    document.getElementById("level-complete-stars")
         .textContent =
         "★ ★ ★ ★ ★";
 
 
     document.getElementById("next-level-button")
-        .style.display = "none";
+        .hidden = true;
 }
 
 
